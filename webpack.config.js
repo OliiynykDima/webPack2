@@ -6,7 +6,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, "dist"),
         filename: "bundle.js",
-        publickPath: "/"
+        publicPath: "/"
     },
     module: {
         rules: [
@@ -24,6 +24,29 @@ module.exports = {
                 exclude: [/node_modules/],
                 use: ["style-loader", "postcss-loader", "css-loader"],
             },
+            {
+                test: /\.(sass|sccs)$/,
+                use: [
+                    {
+                        loader: "style-loader", 
+                    },
+                    {
+                        loader: "css-loader", 
+                    },
+                    {
+                        loader: "sass-loader", 
+                    },
+                ]
+            },
+
         ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: __dirname + "/src/index.html"
+        })
+    ],
+    devServer: {
+        port: 1488
     }
 }
